@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_join_requests",
+  "info": {
+    "singularName": "team-join-request",
+    "pluralName": "team-join-requests",
+    "displayName": "Team Join Request"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "member": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event.event"
+    },
+    "claimed": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "team": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::team.team",
+      "inversedBy": "team_members"
+    },
+    "invite_code": {
+      "type": "string",
+      "minLength": 3
+    }
+  }
+}

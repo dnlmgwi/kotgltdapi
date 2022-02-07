@@ -1,0 +1,32 @@
+{
+  "name": "kotgltdapi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@strapi/plugin-graphql": "4.0.7",
+    "@strapi/plugin-i18n": "4.0.7",
+    "@strapi/plugin-users-permissions": "4.0.7",
+    "@strapi/provider-upload-cloudinary": "^4.0.7",
+    "@strapi/strapi": "4.0.7",
+    "sqlite3": "5.0.2"
+  },
+  "author": {
+    "name": "Daniel Mgawi"
+  },
+  "strapi": {
+    "uuid": "c0f6ca38-fc03-4daa-9b27-c3d11f5e7fad"
+  },
+  "engines": {
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

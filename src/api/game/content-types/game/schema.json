@@ -1,0 +1,88 @@
+{
+  "kind": "collectionType",
+  "collectionName": "games",
+  "info": {
+    "singularName": "game",
+    "pluralName": "games",
+    "displayName": "Game"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "availability": {
+      "type": "enumeration",
+      "enum": [
+        "pre_order",
+        "online",
+        "downloadable",
+        "physical"
+      ]
+    },
+    "genre": {
+      "type": "enumeration",
+      "enum": [
+        "action",
+        "adventure",
+        "fighting",
+        "horror",
+        "interactive",
+        "massively_multiplayer_online",
+        "multiplayer_online_battle_arena",
+        "platformer",
+        "racing",
+        "real_time",
+        "role_playing",
+        "shooter",
+        "simulation",
+        "sports",
+        "stealth",
+        "survival",
+        "tower_defense",
+        "turn_based",
+        "visual_novel"
+      ],
+      "required": true
+    },
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "console",
+        "mobile",
+        "online",
+        "pc",
+        "cross_platform"
+      ],
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 5,
+      "maxLength": 140
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "unique": false,
+      "minLength": 5,
+      "maxLength": 280
+    },
+    "cover": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "matches": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::match.match",
+      "mappedBy": "game"
+    }
+  }
+}

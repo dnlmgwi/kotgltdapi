@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "achievements",
+  "info": {
+    "singularName": "achievement",
+    "pluralName": "achievements",
+    "displayName": "achievement",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "minLength": 5,
+      "unique": true
+    },
+    "reward": {
+      "type": "integer",
+      "min": 10,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 140,
+      "minLength": 5,
+      "required": true
+    },
+    "badge": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "rarity": {
+      "type": "enumeration",
+      "enum": [
+        "common",
+        "uncommon",
+        "rare",
+        "very_rare",
+        "ultra_rare"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "achievements"
+    }
+  }
+}

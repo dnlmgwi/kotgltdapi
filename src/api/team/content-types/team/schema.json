@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teams",
+  "info": {
+    "singularName": "team",
+    "pluralName": "teams",
+    "displayName": "Team",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "invite_code": {
+      "type": "uid",
+      "default": "invite_code",
+      "minLength": 5,
+      "required": true
+    },
+    "captain": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "created_team"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "team_name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "stats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stat.stat",
+      "mappedBy": "team"
+    },
+    "team_members": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::team-join-request.team-join-request",
+      "mappedBy": "team"
+    },
+    "deleted_at": {
+      "type": "datetime"
+    }
+  }
+}

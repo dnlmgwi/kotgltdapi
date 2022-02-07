@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "matches",
+  "info": {
+    "singularName": "match",
+    "pluralName": "matches",
+    "displayName": "Match",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pre",
+        "kickoff",
+        "firstHalf",
+        "secondHalf",
+        "et",
+        "at",
+        "over"
+      ]
+    },
+    "match_type": {
+      "type": "enumeration",
+      "enum": [
+        "arcade",
+        "custom",
+        "special_event",
+        "official",
+        "training"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "minLength": 5,
+      "unique": true
+    },
+    "match_date": {
+      "type": "date",
+      "required": true
+    },
+    "match_time": {
+      "type": "time",
+      "required": true,
+      "default": "09:00"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "game": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game.game",
+      "inversedBy": "matches"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "matches"
+    },
+    "stats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stat.stat",
+      "mappedBy": "match"
+    }
+  }
+}

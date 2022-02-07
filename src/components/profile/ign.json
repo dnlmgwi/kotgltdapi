@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_profile_igns",
+  "info": {
+    "displayName": "ign",
+    "icon": "tag"
+  },
+  "options": {},
+  "attributes": {
+    "game": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::game.game"
+    },
+    "gamer_tag": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

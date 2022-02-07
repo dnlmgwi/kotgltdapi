@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "event_registrations",
+  "info": {
+    "singularName": "event-registration",
+    "pluralName": "event-registrations",
+    "displayName": "event registration",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "event_registrations"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "reference": {
+      "type": "uid"
+    },
+    "deregistered": {
+      "type": "boolean",
+      "default": false
+    },
+    "deregisteration_reason": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "approved",
+        "processing",
+        "rejected"
+      ],
+      "default": "processing"
+    },
+    "registered_at": {
+      "type": "datetime",
+      "required": true
+    },
+    "deregistered_at": {
+      "type": "datetime"
+    }
+  }
+}
