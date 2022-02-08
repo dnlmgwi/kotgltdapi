@@ -5,13 +5,13 @@ module.exports = {
     register: async (userId, eventId) => {
         const uuid = uuidv4();
         const timeNow = new Date();
-        let timeRegistered = timeNow.toISOString();
+        let registeredAt = timeNow.toISOString();
 
         //Check if user is registered 
         const isRegistered = await isUserRegistered(userId, eventId);
 
         //Check if user is deregisted 
-        const isDeregistered = await isUserDeregistered(userId, eventId);
+        await isUserDeregistered(userId, eventId);
 
         //Check if event exists
         const event = await eventExists(eventId);
@@ -25,7 +25,7 @@ module.exports = {
                     user: userId,
                     event: event.id,
                     reference: uuid,
-                    registered_at: timeRegistered,
+                    registered_at: registeredAt,
                 },
 
             });
