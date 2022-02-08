@@ -4,11 +4,11 @@
   "info": {
     "singularName": "event-registration",
     "pluralName": "event-registrations",
-    "displayName": "event registration",
+    "displayName": "Event Registration",
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

@@ -1,8 +1,9 @@
 {
   "collectionName": "components_profile_igns",
   "info": {
-    "displayName": "ign",
-    "icon": "tag"
+    "displayName": "GamerProfiles",
+    "icon": "tag",
+    "description": ""
   },
   "options": {},
   "attributes": {
