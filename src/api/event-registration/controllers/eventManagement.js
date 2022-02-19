@@ -8,12 +8,12 @@ module.exports = {
   //Register
   register: async (ctx, next) => {
     let id = ctx.params.id;
-    // const user = ctx.state.user;
-    // const currentUser = user.id;
-    // console.log(currentUser);
+    const user = ctx.state.user;
+    const currentUser = user.id;
+    console.log(currentUser);
 
     try {
-      let results = await strapi.service('api::event-registration.event-register').register("1", "1");
+      let results = await strapi.service('api::event-registration.event-register').register(currentUser, id);
 
       ctx.body = {
         data: results
@@ -28,12 +28,12 @@ module.exports = {
   //Deregister
   deregister: async (ctx, next) => {
     let id = ctx.params.id;
-    // const user = ctx.state.user;
-    // const currentUser = user.id;
-    // console.log(currentUser);
+    const user = ctx.state.user;
+    const currentUser = user.id;
+    console.log(currentUser);
 
     try {
-      let results = await strapi.service('api::event-registration.event-deregister').deregister("1", "1");
+      let results = await strapi.service('api::event-registration.event-deregister').deregister(currentUser, id);
 
       ctx.body = {
         data: results
@@ -45,12 +45,30 @@ module.exports = {
 
     }
   },
-  //Status
-  status: async (ctx, next) => {
+  //Events User Has Registered to
+  userEvents: async (ctx, next) => {
+    let id = ctx.params.id;
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
     try {
-      ctx.body = 'status checked';
-    } catch (err) {
-      ctx.body = err;
+      let results = await strapi.service('api::event-registration.user-events').userEvents(currentUser);
+
+      //if results is empty, return 404 response
+      if (results.length === 0) {
+        ctx.notFound('No events found');
+      }
+
+      ctx.body = {
+        data: results
+      };
+
+    }
+    catch (err) {
+
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
     }
   },
 };

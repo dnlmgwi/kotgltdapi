@@ -38,14 +38,15 @@ module.exports = {
 
         //if entry is not found, create new entry
         if (entry) {
-            const deregisterationDetails = await strapi.entityService.update('api::event-registration.event-registration', entry.id, {
-                data: {
-                    deregistered: true,
-                    event: null,
-                    deregistered_at: timeDeregistered,
-                },
+            const deregisterationDetails = await strapi.entityService.delete('api::event-registration.event-registration', entry.id);
+            // const deregisterationDetails = await strapi.entityService.update('api::event-registration.event-registration', entry.id, {
+            //     data: {
+            //         deregistered: true,
+            //         event: null,
+            //         deregistered_at: timeDeregistered,
+            //     },
 
-            });
+            // });
 
             return deregisterationDetails;
         } else {

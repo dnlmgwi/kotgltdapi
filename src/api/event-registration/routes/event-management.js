@@ -9,7 +9,7 @@ module.exports = {
     handler: 'event-management.deregister',
   }, { // Path defined with a URL parameter
     method: 'GET',
-    path: '/event/status/:id',
-    handler: 'event-management.status',
+    path: '/user/events',
+    handler: 'event-management.userEvents',
   },]
 }
