@@ -6,10 +6,22 @@
 
 module.exports = {
   join: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteCode;
+    // const user = ctx.state.user;
+    // const currentUser = user.id;
+
     try {
-      ctx.body = 'joining Team';
-    } catch (err) {
-      ctx.body = err;
+      let results = await strapi.service('api::team.team-management').join(inviteCode);
+
+      ctx.body = {
+        data: results
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
     }
   },
   //Deregister
@@ -20,7 +32,8 @@ module.exports = {
       ctx.body = err;
     }
   },
-  myTeam: async (ctx, next) => {
+
+  team: async (ctx, next) => {
     try {
       ctx.body = 'my team';
     } catch (err) {

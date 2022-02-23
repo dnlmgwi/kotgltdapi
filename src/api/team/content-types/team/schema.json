@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -23,7 +23,7 @@
     "invite_code": {
       "type": "uid",
       "default": "invite_code",
-      "minLength": 5,
+      "minLength": 9,
       "required": true
     },
     "captain": {
@@ -38,7 +38,8 @@
     },
     "team_name": {
       "type": "string",
-      "minLength": 3
+      "minLength": 3,
+      "required": true
     },
     "stats": {
       "type": "relation",
