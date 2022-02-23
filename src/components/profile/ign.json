@@ -14,7 +14,7 @@
     },
     "gamer_tag": {
       "type": "string",
-      "required": true
+      "required": false
     }
   }
 }

@@ -71,7 +71,7 @@
     },
     "date_of_birth": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "phone_number": {
       "type": "string",
@@ -79,7 +79,7 @@
     },
     "iso_code": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "stats": {
       "type": "relation",
@@ -101,11 +101,12 @@
       "inversedBy": "captain"
     },
     "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "achievements": {
       "type": "relation",
