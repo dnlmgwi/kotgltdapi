@@ -55,5 +55,42 @@ module.exports = {
       ctx.badRequest(err, err.message);
 
     }
+  }, acceptJoin: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteCode;
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
+    try {
+      let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
+    }
+  },
+  declineJoin: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteCode;
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
+    try {
+      let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
+    }
   },
 };
