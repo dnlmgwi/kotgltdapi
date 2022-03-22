@@ -44,7 +44,7 @@
     },
     "registered_at": {
       "type": "datetime",
-      "required": true
+      "required": false
     },
     "deregistered_at": {
       "type": "datetime"

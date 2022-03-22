@@ -1,12 +1,6 @@
-const { v4: uuidv4 } = require('uuid');
-
 module.exports = {
     //TODO: Add Year to Parameter
     register: async (userId, eventId) => {
-        const uuid = uuidv4();
-        const timeNow = new Date();
-        let registeredAt = timeNow.toISOString();
-
         //Check if user is registered 
         const isRegistered = await isUserRegistered(userId, eventId);
 
@@ -24,8 +18,6 @@ module.exports = {
                 data: {
                     user: userId,
                     event: event.id,
-                    reference: uuid,
-                    registered_at: registeredAt,
                 },
 
             });
