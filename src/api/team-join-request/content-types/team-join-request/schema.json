@@ -4,17 +4,18 @@
   "info": {
     "singularName": "team-join-request",
     "pluralName": "team-join-requests",
-    "displayName": "Team Join Request"
+    "displayName": "Team Join Request",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "member": {
+    "user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::event.event"
+      "target": "plugin::users-permissions.user"
     },
     "claimed": {
       "type": "boolean",

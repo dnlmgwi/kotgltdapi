@@ -63,8 +63,7 @@ module.exports = {
         data: results
       };
 
-    }
-    catch (err) {
+    } catch (err) {
 
       //throw bad request
       ctx.badRequest(err, err.message);

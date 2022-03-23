@@ -6,25 +6,92 @@
 
 module.exports = {
   join: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteCode;
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
     try {
-      ctx.body = 'joining Team';
-    } catch (err) {
-      ctx.body = err;
+      let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
     }
   },
   //Deregister
   leave: async (ctx, next) => {
     try {
-      ctx.body = 'leaving team';
-    } catch (err) {
-      ctx.body = err;
+      let results = await strapi.service('api::team.team-leave').leave(inviteCode);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
     }
   },
-  myTeam: async (ctx, next) => {
+
+  team: async (ctx, next) => {
     try {
-      ctx.body = 'my team';
-    } catch (err) {
-      ctx.body = err;
+      let results = await strapi.service('api::team.team-team').team(inviteCode);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
+    }
+  },
+  acceptJoin: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteId;
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
+    try {
+      let results = await strapi.service('api::team.team-accept-join').acceptJoin(inviteCode, currentUser);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
+    }
+  },
+  declineJoin: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteCode;
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
+    try {
+      let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
+
+      ctx.body = {
+        data: results,
+      };
+
+    }
+    catch (err) {
+      //throw bad request
+      ctx.badRequest(err, err.message);
+
     }
   },
 };
