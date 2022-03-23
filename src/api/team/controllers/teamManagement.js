@@ -55,13 +55,14 @@ module.exports = {
       ctx.badRequest(err, err.message);
 
     }
-  }, acceptJoin: async (ctx, next) => {
-    let inviteCode = ctx.params.inviteCode;
+  },
+  acceptJoin: async (ctx, next) => {
+    let inviteCode = ctx.params.inviteId;
     const user = ctx.state.user;
     const currentUser = user.id;
 
     try {
-      let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
+      let results = await strapi.service('api::team.team-accept-join').acceptJoin(inviteCode, currentUser);
 
       ctx.body = {
         data: results,

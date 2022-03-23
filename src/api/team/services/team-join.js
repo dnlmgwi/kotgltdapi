@@ -4,13 +4,14 @@ module.exports = {
         //Check if the invite code is valid
         const team = await validCode(inviteCode);
 
-        const joinTeam = await JoinTeam(team.id, userId, inviteCode);
+        //TODO: Check if user is already in team
+        
 
-        //Check if user is already in team
+        //TODO: Add user to the team
+        const teamDetails = await JoinTeam(team.id, userId, inviteCode);
 
-        //Add user to team
-
-        return joinTeam;
+        //TODO: Return Invite Details
+        return teamDetails;
     },
 }
 
