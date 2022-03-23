@@ -30,6 +30,12 @@ async function getTeam(userId) {
 
 async function JoinTeam(id, inviteId) {
 
+    //TODO: Check if invite is already claimed
+    // const isClaimed = await strapi.entityService.findOne({
+    //     select: ['id'],
+    //     where: { claimed: false, invite_id: inviteId },
+    // });
+
     const entry = await strapi.entityService.update('api::team-join-request.team-join-request', inviteId, {
 
         data: {
