@@ -1,66 +1,56 @@
 module.exports = {
     declineJoin: async (inviteId, userId) => {
 
-        //Check if the invite code is valid
-        const team = await validCode(inviteCode);
+        // Get the users team, if not a captain throw error
+        const team = await getTeam(userId);
 
-        const joinTeam = await JoinTeam(team.id, userId, inviteCode);
+        // Add invite_id to join_request
+        const joinTeam = await delineInvite(team.id, inviteId);
 
-        //Check if user is already in team
-
-        //Add user to team
+        //Todo: Send email to user
+        //TODO: Check if invite is already claimed
+        //TODO: Remove User from the team
+        //TODO: Check if user is already in another team
 
         return joinTeam;
     },
 }
 
-async function validCode(inviteCode) {
-    const valid_team = await strapi.db.query('api::team.team').findOne({
+async function getTeam(userId) {
+    const team = await strapi.db.query('api::team.team').findOne({
         select: ['id'],
-        where: { invite_code: inviteCode },
+        where: { captain: userId },
     });
 
-    if (!valid_team) {
-        throw new Error('Team does not exist');
+    if (!team) {
+        throw new Error('User is not a captain');
     }
 
-    return valid_team;
+    return team;
 }
 
-async function JoinTeam(id, userId, inviteCode) {
-    const entry = await strapi.db.query('api::team.team').findOne({
-        where: { id: id },
-        select: [
+async function delineInvite(teamId, inviteId) {
 
-            'id',
-            'team_name',
+    //TODO: Check if invite is already claimed
+    // const isClaimed = await strapi.entityService.findOne({
+    //     select: ['id'],
+    //     where: { claimed: false, invite_id: inviteId },
+    // });
 
-        ],
-        populate: {
-            'team_members': true
-        },
-    });
+    // if (!entry) {
+    //     throw new Error(entry); //TODO: Test Error
+    // }
 
-    //Check if team_members lenght is less than 5
-    if (entry.team_members.length < 5) {
-        //Add user to team
+    const entry = await strapi.entityService.delete('api::team-join-request.team-join-request', inviteId);
 
-        const joinTeam = await strapi.entityService.create('api::team-join-request.team-join-request', {
-            data: {
-                invite_code: inviteCode,
-                user: userId,
-            },
-        });
+    // if (!entry) {
+    //     throw new Error(entry); //TODO: Test Error
+    // }
 
-        return {
-            'message': 'Invite Sent Successfully',
-            'team': entry.team_name,
-            'time': joinTeam.createdAt,
-        };
-
-    } else {
-        throw new Error('Team is Full');
-    }
+    return {
+        'message': 'Invite Delined Successfully',
+        // 'team': entry.team_name,
+    };
 
 }
 
