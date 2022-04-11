@@ -56,13 +56,13 @@ module.exports = {
 
     }
   },
-  acceptJoin: async (ctx, next) => {
+  acceptInvite: async (ctx, next) => {
     let inviteCode = ctx.params.inviteId;
     const user = ctx.state.user;
     const currentUser = user.id;
 
     try {
-      let results = await strapi.service('api::team.team-accept-join').acceptJoin(inviteCode, currentUser);
+      let results = await strapi.service('api::team.team-accept-invite').acceptInvite(inviteCode, currentUser);
 
       ctx.body = {
         data: results,
@@ -75,13 +75,14 @@ module.exports = {
 
     }
   },
-  declineJoin: async (ctx, next) => {
-    let inviteCode = ctx.params.inviteCode;
+  declineInvite: async (ctx, next) => {
+    let inviteId = ctx.params.inviteId;
     const user = ctx.state.user;
     const currentUser = user.id;
+    console.log('Current User: ', currentUser);
 
     try {
-      let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
+      let results = await strapi.service('api::team.team-decline-invite').declineInvite(inviteId, currentUser);
 
       ctx.body = {
         data: results,
