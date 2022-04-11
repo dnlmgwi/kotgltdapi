@@ -1,17 +1,17 @@
 module.exports = {
-    acceptJoin: async (inviteId, userId) => {
+    acceptInvite: async (inviteId, userId) => {
 
         // Get the users team, if not a captain throw error
         const team = await getTeam(userId);
 
         // Add invite_id to join_request
-        const joinTeam = await JoinTeam(team.id, inviteId);
+        const joinTheTeam = await joinTeam(team.id, inviteId);
 
-        //Todo: Send email to user
+        //TODO: Send email to user
         //TODO: Check if invite is already claimed
         //TODO: Check if user is already in another team
 
-        return joinTeam;
+        return joinTheTeam;
     },
 }
 
@@ -28,13 +28,9 @@ async function getTeam(userId) {
     return team;
 }
 
-async function JoinTeam(id, inviteId) {
+async function joinTeam(id, inviteId) {
 
-    //TODO: Check if invite is already claimed
-    // const isClaimed = await strapi.entityService.findOne({
-    //     select: ['id'],
-    //     where: { claimed: false, invite_id: inviteId },
-    // });
+    const inviteEntry = await findInvite(id, inviteId)
 
     const entry = await strapi.entityService.update('api::team-join-request.team-join-request', inviteId, {
 
@@ -48,6 +44,20 @@ async function JoinTeam(id, inviteId) {
         'message': 'Invite Accepted Successfully',
         'team': entry.team_name,
     };
+
+}
+
+async function findInvite(id, inviteId) {
+    const entry = await strapi.entityService.findOne('api::team-join-request.team-join-request', inviteId, {
+        fields: ['id'],
+        filters: { team: id },
+    });
+
+    if (!entry) {
+        throw new Error('Invite Not Found');
+    }
+
+    return entry;
 
 }
 

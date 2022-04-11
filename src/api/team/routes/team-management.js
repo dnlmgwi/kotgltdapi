@@ -10,11 +10,11 @@ module.exports = {
     }, { // Path defined with a URL parameter
         method: 'POST',
         path: '/team/accept/:inviteId',
-        handler: 'team-management.acceptJoin',
+        handler: 'team-management.acceptInvite',
     }, { // Path defined with a URL parameter
         method: 'POST',
         path: '/team/decline/:inviteId',
-        handler: 'team-management.declineJoin',
+        handler: 'team-management.declineInvite',
     }, { // Path defined with a URL parameter
         method: 'GET',
         path: '/team/:teamId',

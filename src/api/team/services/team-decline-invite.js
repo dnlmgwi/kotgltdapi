@@ -1,13 +1,15 @@
 module.exports = {
-    declineJoin: async (inviteId, userId) => {
+    declineInvite: async (inviteId, userId) => {
 
         // Get the users team, if not a captain throw error
         const team = await getTeam(userId);
 
-        // Add invite_id to join_request
-        const joinTeam = await delineInvite(team.id, inviteId);
+        console.log(team);
 
-        //Todo: Send email to user
+        // Add invite_id to join_request
+        const joinTeam = await deline(inviteId);
+
+        //TODO: Send email to user
         //TODO: Check if invite is already claimed
         //TODO: Remove User from the team
         //TODO: Check if user is already in another team
@@ -22,6 +24,8 @@ async function getTeam(userId) {
         where: { captain: userId },
     });
 
+    console.log('Team: ', team);
+
     if (!team) {
         throw new Error('User is not a captain');
     }
@@ -29,26 +33,25 @@ async function getTeam(userId) {
     return team;
 }
 
-async function delineInvite(teamId, inviteId) {
+async function deline(inviteId) {
 
+    //Check if invite Exsits
     //TODO: Check if invite is already claimed
-    // const isClaimed = await strapi.entityService.findOne({
-    //     select: ['id'],
-    //     where: { claimed: false, invite_id: inviteId },
-    // });
+    const isClaimed = await strapi.entityService.findOne('api::team-join-request.team-join-request', inviteId, {
+        fields: ['id'],
+    });
 
-    // if (!entry) {
-    //     throw new Error(entry); //TODO: Test Error
-    // }
+    if (!isClaimed) {
+        throw new Error(`Invite Not Found`); //TODO: Test Error
+    } else {
+        //Delete the Invite
+        const entry = await strapi.entityService.delete('api::team-join-request.team-join-request', inviteId);
 
-    const entry = await strapi.entityService.delete('api::team-join-request.team-join-request', inviteId);
-
-    // if (!entry) {
-    //     throw new Error(entry); //TODO: Test Error
-    // }
+        console.log(entry);
+    }
 
     return {
-        'message': 'Invite Delined Successfully',
+        'message': `Invite Delined Successfully`,
         // 'team': entry.team_name,
     };
 

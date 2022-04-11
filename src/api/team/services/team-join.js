@@ -4,8 +4,14 @@ module.exports = {
         //Check if the invite code is valid
         const team = await validCode(inviteCode);
 
+        //TODO Check if invite exists
+
         //TODO: Check if user is already in team
-        
+
+        //Check if user has already sent an invite to prevent mulitple invites
+        const invite = await preventDuplicateInvite(userId);
+
+        console.log(invite);
 
         //TODO: Add user to the team
         const teamDetails = await JoinTeam(team.id, userId, inviteCode);
@@ -13,6 +19,26 @@ module.exports = {
         //TODO: Return Invite Details
         return teamDetails;
     },
+}
+
+async function preventDuplicateInvite(userId) {
+
+    //Check if invite Exsits
+    //TODO: Check if invite is already sent
+    const user = await strapi.entityService.findMany('api::team-join-request.team-join-request', {
+        fields: ['id', 'claimed'],
+        filters: { user: userId },
+        populate: { user: true },
+    });
+
+    //if user is empty dont throw error
+    console.log(user);
+
+    if (typeof user !== 'undefined' && user.length > 0) {
+        throw new Error(`Pending Invite`); //TODO: Test Error
+    }
+
+    return user;
 }
 
 async function validCode(inviteCode) {
