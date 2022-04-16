@@ -17,7 +17,7 @@ module.exports = {
         handler: 'team-management.declineInvite',
     }, { // Path defined with a URL parameter
         method: 'GET',
-        path: '/team/:teamId',
+        path: '/team',
         handler: 'team-management.team',
     },]
 }

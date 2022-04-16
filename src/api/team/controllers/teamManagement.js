@@ -24,7 +24,6 @@ module.exports = {
 
     }
   },
-  //Deregister
   leave: async (ctx, next) => {
     try {
       let results = await strapi.service('api::team.team-leave').leave(inviteCode);
@@ -40,10 +39,13 @@ module.exports = {
 
     }
   },
-
   team: async (ctx, next) => {
+
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
     try {
-      let results = await strapi.service('api::team.team-team').team(inviteCode);
+      let results = await strapi.service('api::team.team-team').team(currentUser);
 
       ctx.body = {
         data: results,
@@ -79,7 +81,6 @@ module.exports = {
     let inviteId = ctx.params.inviteId;
     const user = ctx.state.user;
     const currentUser = user.id;
-    console.log('Current User: ', currentUser);
 
     try {
       let results = await strapi.service('api::team.team-decline-invite').declineInvite(inviteId, currentUser);

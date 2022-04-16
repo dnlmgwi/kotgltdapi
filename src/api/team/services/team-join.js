@@ -9,9 +9,7 @@ module.exports = {
         //TODO: Check if user is already in team
 
         //Check if user has already sent an invite to prevent mulitple invites
-        const invite = await preventDuplicateInvite(userId);
-
-        console.log(invite);
+        await preventDuplicateInvite(userId);
 
         //TODO: Add user to the team
         const teamDetails = await JoinTeam(team.id, userId, inviteCode);
@@ -32,8 +30,6 @@ async function preventDuplicateInvite(userId) {
     });
 
     //if user is empty dont throw error
-    console.log(user);
-
     if (typeof user !== 'undefined' && user.length > 0) {
         throw new Error(`Pending Invite`); //TODO: Test Error
     }
@@ -71,7 +67,6 @@ async function JoinTeam(id, userId, inviteCode) {
     //Check if team_members lenght is less than 5
     if (entry.team_members.length < 5) {
         //Add user to team
-
         const joinTeam = await strapi.entityService.create('api::team-join-request.team-join-request', {
             data: {
                 invite_code: inviteCode,

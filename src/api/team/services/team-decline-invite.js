@@ -4,8 +4,6 @@ module.exports = {
         // Get the users team, if not a captain throw error
         const team = await getTeam(userId);
 
-        console.log(team);
-
         // Add invite_id to join_request
         const joinTeam = await deline(inviteId);
 
@@ -24,8 +22,6 @@ async function getTeam(userId) {
         where: { captain: userId },
     });
 
-    console.log('Team: ', team);
-
     if (!team) {
         throw new Error('User is not a captain');
     }
@@ -38,7 +34,7 @@ async function deline(inviteId) {
     //Check if invite Exsits
     //TODO: Check if invite is already claimed
     const isClaimed = await strapi.entityService.findOne('api::team-join-request.team-join-request', inviteId, {
-        fields: ['id'],
+        fields: ['id', 'claimed'], //Check if invite is already claimed
     });
 
     if (!isClaimed) {
@@ -46,8 +42,6 @@ async function deline(inviteId) {
     } else {
         //Delete the Invite
         const entry = await strapi.entityService.delete('api::team-join-request.team-join-request', inviteId);
-
-        console.log(entry);
     }
 
     return {
