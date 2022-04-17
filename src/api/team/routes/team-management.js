@@ -1,7 +1,7 @@
 module.exports = {
     routes: [{ // Path defined with a URL parameter
         method: 'POST',
-        path: '/team/leave/:teamId',
+        path: '/team/leave',
         handler: 'team-management.leave',
     }, { // Path defined with a URL parameter
         method: 'POST',
@@ -17,7 +17,7 @@ module.exports = {
         handler: 'team-management.declineInvite',
     }, { // Path defined with a URL parameter
         method: 'GET',
-        path: '/team/:teamId',
+        path: '/team',
         handler: 'team-management.team',
     },]
 }
