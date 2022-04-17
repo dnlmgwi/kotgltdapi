@@ -45,7 +45,7 @@ async function findInvite(id) {
     console.log(invites);
 
     if (invites.length === 0) {
-        throw new TeamNotFoundError(); //TODO: Test Error
+        throw new TeamNotFoundError(`User hasn't joined a team`); //TODO: Test Error
     } else {
         return invites[0].id;
     }
