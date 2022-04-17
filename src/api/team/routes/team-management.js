@@ -1,7 +1,7 @@
 module.exports = {
     routes: [{ // Path defined with a URL parameter
         method: 'POST',
-        path: '/team/leave/:teamId',
+        path: '/team/leave',
         handler: 'team-management.leave',
     }, { // Path defined with a URL parameter
         method: 'POST',

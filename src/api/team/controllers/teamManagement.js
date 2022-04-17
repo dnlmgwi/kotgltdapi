@@ -25,8 +25,11 @@ module.exports = {
     }
   },
   leave: async (ctx, next) => {
+    const user = ctx.state.user;
+    const currentUser = user.id;
+
     try {
-      let results = await strapi.service('api::team.team-leave').leave(inviteCode);
+      let results = await strapi.service('api::team.team-leave').leave(currentUser);
 
       ctx.body = {
         data: results,
