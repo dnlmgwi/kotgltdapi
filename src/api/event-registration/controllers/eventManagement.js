@@ -10,7 +10,6 @@ module.exports = {
     let id = ctx.params.id;
     const user = ctx.state.user;
     const currentUser = user.id;
-    console.log(currentUser);
 
     try {
       let results = await strapi.service('api::event-registration.event-register').register(currentUser, id);
@@ -30,7 +29,6 @@ module.exports = {
     let id = ctx.params.id;
     const user = ctx.state.user;
     const currentUser = user.id;
-    console.log(currentUser);
 
     try {
       let results = await strapi.service('api::event-registration.event-deregister').deregister(currentUser, id);
