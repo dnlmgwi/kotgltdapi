@@ -4,6 +4,8 @@ module.exports = {
         // Get the users team, if not a captain throw error
         const team = await getTeam(userId);
 
+        console.log(team);
+
         // Add invite_id to join_request
         const joinTheTeam = await joinTeam(team.id, inviteId);
 
@@ -21,6 +23,8 @@ async function getTeam(userId) {
         where: { captain: userId },
     });
 
+
+
     if (!team) {
         throw new Error('User is not a captain');
     }
@@ -31,14 +35,16 @@ async function getTeam(userId) {
 async function joinTeam(id, inviteId) {
 
     await findInvite(id, inviteId)
-
-    const entry = await strapi.entityService.update('api::team-join-request.team-join-request', inviteId, {
+    
+    const entry = await strapi.entityService.update('api::invite.invite', inviteId, {
 
         data: {
             team: id,
             claimed: true
         },
     });
+
+    console.log(entry);
 
     return {
         'message': 'Invite Accepted Successfully',
@@ -50,7 +56,7 @@ async function joinTeam(id, inviteId) {
 async function findInvite(id, inviteId) {
 
     //TODO: Check if invite is already claimed
-    const isClaimed = await strapi.entityService.findOne('api::team-join-request.team-join-request', inviteId, {
+    const isClaimed = await strapi.entityService.findOne('api::invite.invite', inviteId, {
         fields: ['id', 'claimed'], //Check if invite is already claimed
         filters: { team: id },
     });

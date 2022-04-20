@@ -50,7 +50,7 @@
     "team_members": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::team-join-request.team-join-request",
+      "target": "api::invite.invite",
       "mappedBy": "team"
     },
     "deleted_at": {

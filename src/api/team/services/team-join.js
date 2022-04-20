@@ -23,7 +23,7 @@ async function preventDuplicateInvite(userId) {
 
     //Check if invite Exsits
     //TODO: Check if invite is already sent
-    const user = await strapi.entityService.findMany('api::team-join-request.team-join-request', {
+    const user = await strapi.entityService.findMany('api::invite.invite', {
         fields: ['id', 'claimed'],
         filters: { user: userId },
         populate: { user: true },
@@ -67,7 +67,7 @@ async function JoinTeam(id, userId, inviteCode) {
     //Check if team_members lenght is less than 5
     if (entry.team_members.length < 5) {
         //Add user to team
-        const joinTeam = await strapi.entityService.create('api::team-join-request.team-join-request', {
+        const joinTeam = await strapi.entityService.create('api::invite.invite', {
             data: {
                 invite_code: inviteCode,
                 user: userId,

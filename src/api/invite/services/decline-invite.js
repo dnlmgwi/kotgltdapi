@@ -22,6 +22,8 @@ async function getTeam(userId) {
         where: { captain: userId },
     });
 
+    console.log(team);
+
     if (!team) {
         throw new Error('User is not a captain');
     }
@@ -33,7 +35,7 @@ async function deline(inviteId) {
 
     //Check if invite Exsits
     //TODO: Check if invite is already claimed
-    const isClaimed = await strapi.entityService.findOne('api::team-join-request.team-join-request', inviteId, {
+    const isClaimed = await strapi.entityService.findOne('api::invite.invite', inviteId, {
         fields: ['id', 'claimed'], //Check if invite is already claimed
     });
 
@@ -43,7 +45,7 @@ async function deline(inviteId) {
         throw new Error(`Invite Not Found`); //TODO: Test Error
     } else {
         //Delete the Invite
-        await strapi.entityService.delete('api::team-join-request.team-join-request', inviteId);
+        await strapi.entityService.delete('api::invite.invite', inviteId);
     }
 
     return {
