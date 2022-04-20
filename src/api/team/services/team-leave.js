@@ -29,7 +29,7 @@ async function getTeam(userId) {
 //Find Users Invite
 async function findInvite(id) {
 
-    const invites = await strapi.entityService.findMany('api::team-join-request.team-join-request', {
+    const invites = await strapi.entityService.findMany('api::invite.invite', {
         populate: {
             user: {
                 fields: ['id'],
@@ -51,7 +51,7 @@ async function findInvite(id) {
 //Delete Invite and Exit Team
 async function leaveTeam(inviteId) {
 
-    await strapi.entityService.delete('api::team-join-request.team-join-request', inviteId);
+    await strapi.entityService.delete('api::invite.invite', inviteId);
 
     return {
         'message': `Team Exit Successful`,

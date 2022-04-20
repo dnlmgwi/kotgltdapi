@@ -9,7 +9,7 @@ module.exports = {
             console.log(result);
 
             //TODO: Check if invite is already claimed
-            const userEmail = await strapi.entityService.findOne('api::team-join-request.team-join-request', result.id, {
+            const userEmail = await strapi.entityService.findOne('api::invite.invite', result.id, {
                 fields: ['id'],
                 populate: {
                     user: {

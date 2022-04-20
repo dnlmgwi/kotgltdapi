@@ -2,9 +2,9 @@
   "kind": "collectionType",
   "collectionName": "team_join_requests",
   "info": {
-    "singularName": "team-join-request",
-    "pluralName": "team-join-requests",
-    "displayName": "Team Join Request",
+    "singularName": "invite",
+    "pluralName": "invites",
+    "displayName": "Invite",
     "description": ""
   },
   "options": {
