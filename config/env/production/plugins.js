@@ -20,4 +20,30 @@ module.exports = ({
   publisher: {
     enabled: true,
   },
+  io: {
+    enabled: true,
+    config: {
+      IOServerOptions: {
+        cors: { origin: "http://localhost:1337", "methods": ["GET"] },
+      },
+      contentTypes: {
+        stat: "*",
+        team: ["create", "update", "delete"],
+      },
+      events: [
+        {
+          name: "connection",
+          handler: ({ strapi }, socket) => {
+            strapi.log.info(`[io] new connection with id ${socket.id}`);
+          },
+        },
+        {
+          name: "disconnect",
+          handler: ({ strapi }, socket) => {
+            strapi.log.info(`[io] new disconnection`);
+          },
+        },
+      ]
+    },
+  },
 });

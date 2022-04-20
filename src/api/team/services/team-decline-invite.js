@@ -37,6 +37,8 @@ async function deline(inviteId) {
         fields: ['id', 'claimed'], //Check if invite is already claimed
     });
 
+    console.log(isClaimed);
+
     if (!isClaimed) {
         throw new Error(`Invite Not Found`); //TODO: Test Error
     } else {
