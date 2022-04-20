@@ -27,7 +27,7 @@ async function getTeam(userId) {
     return team;
 }
 //Find Users Invite
-async function findInvite(id) {
+async function findInvite(userId) {
 
     const invites = await strapi.entityService.findMany('api::invite.invite', {
         populate: {
@@ -35,19 +35,26 @@ async function findInvite(id) {
                 fields: ['id'],
                 filters: {
                     id: {
-                        $eq: id,
+                        $eq: userId,
                     },
                 },
             },
         },
     });
 
+    //if no invite throw error
     if (invites.length === 0) {
-        throw new TeamNotFoundError(`User hasn't joined a team`); //TODO: Test Error
+        throw new TeamNotFoundError('No Team Found'); //TODO: Test Error
+    }
+
+    //Check if invite is already claimed
+    if (invites[0].claimed === false) {
+        throw new TeamNotFoundError('You have a pending invite'); //TODO: Test Error
     } else {
         return invites[0].id;
     }
 }
+
 //Delete Invite and Exit Team
 async function leaveTeam(inviteId) {
 
@@ -69,6 +76,6 @@ class TeamCaptainError extends Error {
 class TeamNotFoundError extends Error {
     constructor(message) {
         super(message);
-        this.name = "Team Not Found";
+        this.name = `User hasn't joined a team`;
     }
 }
