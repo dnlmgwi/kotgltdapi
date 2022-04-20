@@ -2,7 +2,7 @@
   "name": "kotgltdapi",
   "private": true,
   "version": "0.1.9",
-  "description": "A Strapi application",
+  "description": "KOTG API",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",

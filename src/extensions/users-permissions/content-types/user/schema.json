@@ -113,6 +113,12 @@
       "relation": "oneToMany",
       "target": "api::achievement.achievement",
       "mappedBy": "user"
+    },
+    "invoices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::invoice.invoice",
+      "mappedBy": "shipTo"
     }
   }
 }
