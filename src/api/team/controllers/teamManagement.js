@@ -61,42 +61,4 @@ module.exports = {
 
     }
   },
-  acceptInvite: async (ctx, next) => {
-    let inviteCode = ctx.params.inviteId;
-    const user = ctx.state.user;
-    const currentUser = user.id;
-
-    try {
-      let results = await strapi.service('api::team.team-accept-invite').acceptInvite(inviteCode, currentUser);
-
-      ctx.body = {
-        data: results,
-      };
-
-    }
-    catch (err) {
-      //throw bad request
-      ctx.badRequest(err, err.message);
-
-    }
-  },
-  declineInvite: async (ctx, next) => {
-    let inviteId = ctx.params.inviteId;
-    const user = ctx.state.user;
-    const currentUser = user.id;
-
-    try {
-      let results = await strapi.service('api::team.team-decline-invite').declineInvite(inviteId, currentUser);
-
-      ctx.body = {
-        data: results,
-      };
-
-    }
-    catch (err) {
-      //throw bad request
-      ctx.badRequest(err, err.message);
-
-    }
-  },
 };
