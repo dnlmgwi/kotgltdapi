@@ -15,5 +15,9 @@ module.exports = {
         method: 'POST',
         path: '/team/create/:name',
         handler: 'team.create',
+    }, { // Path defined with a URL parameter
+        method: 'DELETE',
+        path: '/team/delete',
+        handler: 'team.delete',
     },]
 }
