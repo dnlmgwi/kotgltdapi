@@ -39,7 +39,8 @@
     "team_name": {
       "type": "string",
       "minLength": 3,
-      "required": true
+      "required": true,
+      "unique": true
     },
     "stats": {
       "type": "relation",
