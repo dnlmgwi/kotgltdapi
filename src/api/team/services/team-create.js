@@ -4,6 +4,10 @@ module.exports = {
         //Check if user has already sent an invite to prevent mulitple invites
         await preventDuplicateTeamCaptains(userId);
 
+        //TODO: Check if user has already created a team
+        //Check if user has already sent an invite to prevent Captains Joining and Creating Teams
+        await findPendingInvite(userId);
+
         //TODO: Add user to the team
         const teamDetails = await CreateTeam(name, userId);
 
@@ -45,5 +49,27 @@ async function CreateTeam(name, userId) {
         'time': team.createdAt,
     };
 
+}
+
+//Find Users Invite
+async function findPendingInvite(userId) {
+
+    const invites = await strapi.entityService.findMany('api::invite.invite', {
+        populate: {
+            user: {
+                fields: ['id'],
+                filters: {
+                    id: {
+                        $eq: userId,
+                    },
+                },
+            },
+        },
+    });
+
+    //if no invite throw error
+    if (invites.length !== 0) {
+        throw new Error('You have a pending invite'); //TODO: Test Error
+    }
 }
 
