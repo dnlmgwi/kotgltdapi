@@ -47,6 +47,16 @@ module.exports = ({
   publisher: {
     enabled: true,
   },
+  transformer: {
+    enabled: true,
+    config: {
+      prefix: '/api/',
+      responseTransforms: {
+        removeAttributesKey: true,
+        removeDataKey: true,
+      }
+    }
+  },
   io: {
     enabled: true,
     config: {
