@@ -4,9 +4,9 @@ module.exports = {
         //Check if user has already sent an invite to prevent mulitple invites
         const team = await findTeam(userId);
         //TODO: Delete all invites to team
-        await DeleteTeam(team.id);
+        const result = await DeleteTeam(team.id);
         //TODO: Return Invite Details
-        return team;
+        return result;
     },
 }
 
