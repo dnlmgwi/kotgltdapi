@@ -6,8 +6,6 @@ module.exports = {
 
         try {
 
-            console.log(result);
-
             //TODO: Check if invite is already claimed
             const userEmail = await strapi.entityService.findOne('api::invite.invite', result.id, {
                 fields: ['id'],
@@ -19,7 +17,7 @@ module.exports = {
             });
 
             //TODO Send Email
-            console.log(userEmail.user.email);
+            // userEmail.user.email;
 
         } catch (error) {
             console.log(error);

@@ -4,8 +4,6 @@ module.exports = {
         // Get the users team, if not a captain throw error
         const team = await getTeam(userId);
 
-        console.log(team);
-
         // Add invite_id to join_request
         const joinTheTeam = await joinTeam(team.id, inviteId);
 
@@ -43,8 +41,6 @@ async function joinTeam(id, inviteId) {
             claimed: true
         },
     });
-
-    console.log(entry);
 
     return {
         'message': 'Invite Accepted Successfully',

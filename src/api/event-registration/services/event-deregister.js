@@ -16,8 +16,6 @@ module.exports = {
 
         });
 
-        console.log(isDeregistered);
-
         if (!entry) {
             throw new Error('User is not registered for this event');
         }

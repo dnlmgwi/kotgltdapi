@@ -45,8 +45,6 @@ async function DeleteTeam(teamId) {
         },
     });
 
-    console.log(entry);
-
     return {
         'message': 'Team Deleted Successfully',
         'team': entry.deleted_at,

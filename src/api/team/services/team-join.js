@@ -29,9 +29,6 @@ async function preventDuplicateInvite(userId) {
         populate: { user: true },
     });
 
-    console.log(user);
-
-    //TODO Fix This Function: Muliple Invites Are Being Added
     //if user is empty dont throw error
     if (typeof user !== 'undefined' && user.length !== 0) {
         throw new Error(`Pending Invite`); //TODO: Test Error
