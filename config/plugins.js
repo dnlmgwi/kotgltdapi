@@ -65,7 +65,7 @@ module.exports = ({
       },
       contentTypes: {
         stat: "*",
-        team: ["create", "update", "delete"],
+        team: "*",
       },
       events: [
         {
