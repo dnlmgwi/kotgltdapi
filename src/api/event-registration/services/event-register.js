@@ -10,7 +10,7 @@ module.exports = {
         //Check if event exists
         const event = await eventExists(eventId);
 
-        // await checkMaxParticipants(event.id);
+        await checkMaxParticipants(event.id);
 
         //if entry is not found, create new entry
         if (!isRegistered) {
@@ -78,9 +78,6 @@ async function checkMaxParticipants(eventId) {
             }
         }
     });
-
-    console.log(entry);
-
 
     if (entry.event_registrations.length < entry.max_participants) {
         return true;
