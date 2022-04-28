@@ -10,7 +10,7 @@ module.exports = {
         //Check if event exists
         const event = await eventExists(eventId);
 
-
+        await checkMaxParticipants(event.id);
 
         //if entry is not found, create new entry
         if (!isRegistered) {
@@ -24,7 +24,7 @@ module.exports = {
 
             return registerationDetails;
         } else {
-            throw new Error('User is already registered for this event');
+            throw new RegisteredAlreadyError('User is already registered for this event');
         }
 
     }
@@ -68,5 +68,37 @@ async function eventExists(eventId) {
     return isEvent;
 }
 
+async function checkMaxParticipants(eventId) {
+
+    const entry = await strapi.entityService.findOne('api::event.event', eventId, {
+        fields: ['id', 'max_participants'],
+        populate: {
+            event_registrations: {
+                fields: ['id'],
+            }
+        }
+    });
+
+    console.log(entry);
 
 
+    if (entry.event_registrations.length < entry.max_participants) {
+        return true;
+    } else {
+        throw new EventFullError('Max Participants Reached');
+    }
+}
+
+class EventFullError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "Event full error";
+    }
+}
+
+class RegisteredAlreadyError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "User already registered error";
+    }
+}

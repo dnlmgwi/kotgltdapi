@@ -83,8 +83,14 @@ async function JoinTeam(id, userId, inviteCode) {
         };
 
     } else {
-        throw new Error('Team is Full');
+        throw new TeamFullError('Team is Full');
     }
 
 }
 
+class TeamFullError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "Max Members Reached";
+    }
+}
