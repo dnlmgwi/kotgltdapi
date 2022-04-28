@@ -28,12 +28,12 @@ module.exports = createCoreController('api::team.team', ({ strapi }) => ({
     },
 
     async delete(ctx) {
-        const id = ctx.params.id;
         const user = ctx.state.user;
         const currentUser = user.id;
 
         try {
-            let results = await strapi.service('api::team.team-delete').delete(id, currentUser);
+
+            let results = await strapi.service('api::team.team-delete').delete( currentUser);
 
             //TODO Sanitize All Results
             const sanitizedEntity = await this.sanitizeOutput(results, ctx);

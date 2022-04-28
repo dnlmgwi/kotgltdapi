@@ -1,10 +1,19 @@
 module.exports = {
-    delete: async (teamId, userId) => {
+    delete: async (userId) => {
         //TODO: Check if user is already a captain
         //Check if user has already sent an invite to prevent mulitple invites
+        console.log(userId);
+
         const team = await findTeam(userId);
-        //TODO: Delete all invites to team
+
+        console.log(team);
+
+        //TODO: Delete Team
         const result = await DeleteTeam(team.id);
+
+        //TODO: Delete all invites with Team Code
+        await DeleteTeamInvites(team.invite_code);
+
         //TODO: Return Invite Details
         return result;
     },
@@ -15,9 +24,8 @@ module.exports = {
 async function findTeam(userId) {
     //TODO: Check if user has a team is already
     const team = await strapi.entityService.findMany('api::team.team', {
-        fields: ['id', 'team_name'],
+        fields: ['id', 'team_name', 'invite_code'],
         filters: { captain: userId },
-        populate: { captain: true },
     });
 
     //if team is empty dont throw error
@@ -49,6 +57,20 @@ async function DeleteTeam(teamId) {
         'message': 'Team Deleted Successfully',
         'team': entry.deleted_at,
     };
+
+}
+
+
+//TODO Delete Team Invites
+async function DeleteTeamInvites(InviteCode) {
+
+    await strapi.db.query('api::invite.invite').deleteMany({
+        where: {
+            invite_code: {
+                $eq: InviteCode,
+            },
+        },
+    });
 
 }
 

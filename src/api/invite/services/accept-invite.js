@@ -33,7 +33,7 @@ async function getTeam(userId) {
 async function joinTeam(id, inviteId) {
 
     await findInvite(id, inviteId)
-    
+
     const entry = await strapi.entityService.update('api::invite.invite', inviteId, {
 
         data: {
