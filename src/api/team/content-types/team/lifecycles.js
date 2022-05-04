@@ -1,8 +1,10 @@
-const { nanoid } = require("nanoid/non-secure");
+const { customRandom, urlAlphabet } = require('nanoid')
 
 module.exports = {
     beforeCreate(event) {
-        const id = nanoid(9);
+        //URL-friendly symbols
+        //https://github.com/ai/nanoid#readme
+        const id = customRandom(urlAlphabet, 10, random)
         const { data, where, select, populate } = event.params;
 
         data.invite_code = id;

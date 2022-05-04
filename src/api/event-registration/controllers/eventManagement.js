@@ -12,13 +12,15 @@ module.exports = {
     const currentUser = user.id;
 
     try {
+
       let results = await strapi.service('api::event-registration.event-register').register(currentUser, id);
 
-      ctx.body = {
-        data: results
-      };
+      //TODO Sanitize All Results
+      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-    } catch (err) {
+      return this.transformResponse(sanitizedEntity);
+    }
+    catch (err) {
       //throw bad request
       ctx.badRequest(err, err.message);
 
@@ -31,13 +33,15 @@ module.exports = {
     const currentUser = user.id;
 
     try {
+
       let results = await strapi.service('api::event-registration.event-deregister').deregister(currentUser, id);
 
-      ctx.body = {
-        data: results
-      };
+      //TODO Sanitize All Results
+      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-    } catch (err) {
+      return this.transformResponse(sanitizedEntity);
+    }
+    catch (err) {
       //throw bad request
       ctx.badRequest(err, err.message);
 
@@ -50,6 +54,7 @@ module.exports = {
     const currentUser = user.id;
 
     try {
+
       let results = await strapi.service('api::event-registration.user-events').userEvents(currentUser);
 
       //if results is empty, return 404 response
@@ -57,12 +62,12 @@ module.exports = {
         ctx.notFound('No events found');
       }
 
-      ctx.body = {
-        data: results
-      };
+      //TODO Sanitize All Results
+      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-    } catch (err) {
-
+      return this.transformResponse(sanitizedEntity);
+    }
+    catch (err) {
       //throw bad request
       ctx.badRequest(err, err.message);
 

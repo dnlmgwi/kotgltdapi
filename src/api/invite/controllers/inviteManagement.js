@@ -11,12 +11,13 @@ module.exports = {
     const currentUser = user.id;
 
     try {
+
       let results = await strapi.service('api::invite.accept-invite').acceptInvite(inviteId, currentUser);
 
-      ctx.body = {
-        data: results,
-      };
+      //TODO Sanitize All Results
+      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
+      return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request
@@ -30,12 +31,13 @@ module.exports = {
     const currentUser = user.id;
 
     try {
+
       let results = await strapi.service('api::invite.decline-invite').declineInvite(inviteId, currentUser);
 
-      ctx.body = {
-        data: results,
-      };
+      //TODO Sanitize All Results
+      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
+      return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request
