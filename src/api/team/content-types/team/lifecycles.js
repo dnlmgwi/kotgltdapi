@@ -1,15 +1,11 @@
-const { customAlphabet } = require('nanoid');
+const { nanoid } = require("nanoid/non-secure");
 
 module.exports = {
     beforeCreate(event) {
         //URL-friendly symbols
         //https://github.com/ai/nanoid#readme
-        const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        const id = customAlphabet(alphabet, 10);
-
-
+        const id = nanoid(9);
         const { data, where, select, populate } = event.params;
-
         data.invite_code = id;
     },
 };
