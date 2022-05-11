@@ -16,9 +16,13 @@ module.exports = {
       let results = await strapi.service('api::event-registration.event-register').register(currentUser, id);
 
       //TODO Sanitize All Results
-      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+      // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-      return this.transformResponse(sanitizedEntity);
+      ctx.body = {
+        data: results,
+      };
+
+      // return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request
@@ -37,9 +41,13 @@ module.exports = {
       let results = await strapi.service('api::event-registration.event-deregister').deregister(currentUser, id);
 
       //TODO Sanitize All Results
-      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+      // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-      return this.transformResponse(sanitizedEntity);
+      ctx.body = {
+        data: results,
+      };
+
+      // return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request
@@ -63,9 +71,13 @@ module.exports = {
       }
 
       //TODO Sanitize All Results
-      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+      // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-      return this.transformResponse(sanitizedEntity);
+      ctx.body = {
+        data: results,
+      };
+
+      // return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request

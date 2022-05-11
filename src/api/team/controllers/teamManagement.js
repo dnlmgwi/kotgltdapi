@@ -15,9 +15,13 @@ module.exports = {
       let results = await strapi.service('api::team.team-join').join(inviteCode, currentUser);
 
       //TODO Sanitize All Results
-      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+      // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-      return this.transformResponse(sanitizedEntity);
+      ctx.body = {
+        data: results,
+      };
+
+      // return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request
@@ -34,9 +38,13 @@ module.exports = {
       let results = await strapi.service('api::team.team-leave').leave(currentUser);
 
       //TODO Sanitize All Results
-      const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+      // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-      return this.transformResponse(sanitizedEntity);
+      ctx.body = {
+        data: results,
+      };
+
+      // return this.transformResponse(sanitizedEntity);
     }
     catch (err) {
       //throw bad request

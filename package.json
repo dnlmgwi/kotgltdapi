@@ -1,8 +1,8 @@
 {
   "name": "kotgltdapi",
   "private": true,
-  "version": "0.1.19",
-  "description": "KOTG API",
+  "version": "0.1.20",
+  "description": "King Of The Grid API",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",

@@ -89,13 +89,13 @@ async function checkMaxParticipants(eventId) {
 class EventFullError extends Error {
     constructor(message) {
         super(message);
-        this.name = "Event full error";
+        this.name = "Event Full Error";
     }
 }
 
 class RegisteredAlreadyError extends Error {
     constructor(message) {
         super(message);
-        this.name = "User already registered error";
+        this.name = "User Already Registered Error";
     }
 }

@@ -16,9 +16,13 @@ module.exports = createCoreController('api::team.team', ({ strapi }) => ({
             let results = await strapi.service('api::team.team-create').create(name, currentUser);
 
             //TODO Sanitize All Results
-            const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+            // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-            return this.transformResponse(sanitizedEntity);
+            ctx.body = {
+                data: results,
+            };
+
+      // return this.transformResponse(sanitizedEntity);
         }
         catch (err) {
             //throw bad request
@@ -36,9 +40,13 @@ module.exports = createCoreController('api::team.team', ({ strapi }) => ({
             let results = await strapi.service('api::team.team-delete').delete( currentUser);
 
             //TODO Sanitize All Results
-            const sanitizedEntity = await this.sanitizeOutput(results, ctx);
+            // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-            return this.transformResponse(sanitizedEntity);
+            ctx.body = {
+                data: results,
+            };
+
+      // return this.transformResponse(sanitizedEntity);
         }
         catch (err) {
             //throw bad request
