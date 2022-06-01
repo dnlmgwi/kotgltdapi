@@ -1,5 +1,10 @@
 'use strict';
 
+const utils = require('@strapi/utils');
+
+const { sanitize } = utils;
+const { ApplicationError, ValidationError } = utils.errors;
+
 /**
  * A set of functions called "actions" for `teamManagement`
  */
@@ -60,7 +65,7 @@ module.exports = {
 
     try {
 
-      let results = await strapi.service('api::invite.delete-invite').deleteInvite(inviteId,currentUser);
+      let results = await strapi.service('api::invite.delete-invite').deleteInvite(inviteId, currentUser);
 
       //TODO Sanitize All Results
       // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
