@@ -119,6 +119,12 @@
       "relation": "oneToMany",
       "target": "api::invoice.invoice",
       "mappedBy": "shipTo"
+    },
+    "wallet": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::wallet.wallet",
+      "mappedBy": "user"
     }
   }
 }
