@@ -81,12 +81,6 @@
       "type": "string",
       "required": false
     },
-    "stats": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::stat.stat",
-      "mappedBy": "user"
-    },
     "IGN": {
       "displayName": "ign",
       "type": "component",
@@ -114,11 +108,11 @@
       "target": "api::achievement.achievement",
       "mappedBy": "user"
     },
-    "invoices": {
+    "wallet": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::invoice.invoice",
-      "mappedBy": "shipTo"
+      "relation": "oneToOne",
+      "target": "api::wallet.wallet",
+      "mappedBy": "user"
     }
   }
 }

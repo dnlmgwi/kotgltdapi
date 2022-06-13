@@ -1,7 +1,7 @@
 {
   "name": "kotgltdapi",
   "private": true,
-  "version": "0.1.20",
+  "version": "0.1.23",
   "description": "King Of The Grid API",
   "scripts": {
     "develop": "strapi develop",
@@ -17,6 +17,7 @@
     "@strapi/provider-email-nodemailer": "^4.1.12",
     "@strapi/provider-upload-cloudinary": "^4.1.12",
     "@strapi/strapi": "4.1.12",
+    "axios": "^0.27.2",
     "node-2fa": "^2.0.3",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0",
