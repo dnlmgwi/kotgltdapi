@@ -12,14 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "balance": {
-      "type": "integer",
-      "required": true,
-      "default": 0
-    },
-    "last_transaction": {
-      "type": "datetime"
-    },
     "account_id": {
       "type": "uid"
     },
@@ -29,14 +21,8 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "wallet"
     },
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "processing",
-        "normal"
-      ],
-      "default": "normal",
-      "required": true
+    "account_number": {
+      "type": "uid"
     }
   }
 }

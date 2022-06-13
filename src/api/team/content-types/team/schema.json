@@ -42,12 +42,6 @@
       "required": true,
       "unique": true
     },
-    "stats": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::stat.stat",
-      "mappedBy": "team"
-    },
     "team_members": {
       "type": "relation",
       "relation": "oneToMany",
