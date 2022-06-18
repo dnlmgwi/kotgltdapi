@@ -1,11 +1,9 @@
-const { nanoid } = require("nanoid/non-secure");
 const { ApplicationError } = require("@strapi/utils").errors;
 
 
 
 module.exports = {
     async beforeCreate(event) {
-        const id = nanoid(9);
         const { data, where, select, populate } = event.params;
 
         if (data.user === undefined) {
@@ -20,6 +18,14 @@ module.exports = {
             data.account_id = wallet.id;
         } catch (error) {
             throw new ApplicationError(error, 400);
+        }
+    },
+
+    async beforeUpdate(event) {
+        const { data, where, select, populate } = event.params;
+
+        if (data.user !== undefined) {
+            throw new ApplicationError('You cant reassign a wallet', 400);
         }
     },
 };
