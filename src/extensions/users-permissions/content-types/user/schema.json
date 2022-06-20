@@ -114,7 +114,7 @@
       "target": "api::wallet.wallet",
       "mappedBy": "user"
     },
-    "Gender": {
+    "gender": {
       "type": "enumeration",
       "enum": [
         "male",
