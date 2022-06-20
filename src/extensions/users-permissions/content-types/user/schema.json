@@ -113,6 +113,14 @@
       "relation": "oneToOne",
       "target": "api::wallet.wallet",
       "mappedBy": "user"
+    },
+    "Gender": {
+      "type": "enumeration",
+      "enum": [
+        "male",
+        "female",
+        "ratherNotSay"
+      ]
     }
   }
 }
