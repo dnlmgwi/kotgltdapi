@@ -9,7 +9,7 @@ module.exports = {
         const { data, where, select, populate } = event.params;
         data.invite_code = id;
 
-        if (data.user === undefined) {
+        if (data.captain === undefined) {
             throw new ApplicationError('Please Assign Team Captain', 400);
         }
     },
