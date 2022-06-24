@@ -1,6 +1,6 @@
 const { ApplicationError } = require("@strapi/utils").errors;
 const { customAlphabet } = require('nanoid');
-const alphabet = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz';
+const alphabet = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZ';
 
 module.exports = {
     beforeCreate(event) {
