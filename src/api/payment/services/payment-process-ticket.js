@@ -1,14 +1,15 @@
 const axios = require('axios').default;
 
 module.exports = {
-    processTicket: async (ticketId) => {
+    processTicket: async (ticketDetails, paymentDetails) => {
 
-        const eventDetails = await findEventRegistrationDetails(ticketId);
-
-        //Change From Processing to Approved
+        const eventDetails = await findEventRegistrationDetails(ticketDetails.id);
+        //TODO Create Invoice
+        //TODO Change From Processing to Approved
         const entry = await strapi.entityService.update('api::event-registration.event-registration', eventDetails.id, {
             data: {
                 status: 'approved',
+                transaction_id: paymentDetails.transaction_id
             },
         });
 
