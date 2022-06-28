@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payments",
+  "info": {
+    "singularName": "payment",
+    "pluralName": "payments",
+    "displayName": "Payment"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "conversation_id": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "response_code": {
+      "required": true,
+      "type": "integer"
+    },
+    "response_desc": {
+      "type": "string",
+      "required": true
+    },
+    "response_time": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

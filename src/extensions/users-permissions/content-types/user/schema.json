@@ -108,12 +108,6 @@
       "target": "api::achievement.achievement",
       "mappedBy": "user"
     },
-    "wallet": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::wallet.wallet",
-      "mappedBy": "user"
-    },
     "gender": {
       "type": "enumeration",
       "enum": [

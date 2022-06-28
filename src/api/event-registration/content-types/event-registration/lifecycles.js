@@ -25,8 +25,9 @@ module.exports = {
     async beforeUpdate(event) {
         const { data, where, select, populate } = event.params;
 
-        if (data.user !== undefined) {
-            throw new ApplicationError('You cant reassign a user', 400);
-        }
+        //TODO Prevent Reassignment
+        // if (data.user !== undefined) {
+        //     throw new ApplicationError('You cant reassign a user', 400);
+        // }
     },
 };

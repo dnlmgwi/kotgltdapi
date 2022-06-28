@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * wallet service.
+ * payment service.
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::wallet.wallet');
+module.exports = createCoreService('api::payment.payment');
