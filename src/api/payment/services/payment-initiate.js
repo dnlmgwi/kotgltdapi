@@ -10,25 +10,8 @@ module.exports = {
 
         const response = await initialPayment(data.msisdn, eventDetails.event.price, eventDetails.reference, eventDetails.event.name);
 
-        //Create Invoice
-        //Edit Ticket Status
-        let results = await strapi.service('api::payment.payment-process-ticket').processTicket(ticket.id);
+        return response;
 
-        console.log(results);
-
-        return {
-            "response_time": response.response_time,
-            "external_ref": response.external_ref,
-            "transaction_id": response.transaction_id,
-            "msisdn": response.msisdn,
-            "amount": response.amount,
-            "remark": response.remark,
-            "ticket": {
-                reference: results.reference,
-                status: results.status,
-                updatedAt: results.updatedAt,
-            }
-        };
     },
 }
 

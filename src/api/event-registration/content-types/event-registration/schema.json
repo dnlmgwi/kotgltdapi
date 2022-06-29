@@ -48,6 +48,10 @@
     },
     "deregistered_at": {
       "type": "datetime"
+    },
+    "transaction_id": {
+      "type": "string",
+      "unique": true
     }
   }
 }

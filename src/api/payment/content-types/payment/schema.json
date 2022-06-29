@@ -4,7 +4,8 @@
   "info": {
     "singularName": "payment",
     "pluralName": "payments",
-    "displayName": "Payment"
+    "displayName": "Payment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -13,19 +14,26 @@
   "attributes": {
     "conversation_id": {
       "type": "string",
-      "unique": true,
+      "unique": false,
       "required": true
     },
-    "response_code": {
-      "required": true,
-      "type": "integer"
+    "result_desc": {
+      "type": "string",
+      "required": true
     },
-    "response_desc": {
+    "transaction_id": {
+      "type": "string",
+      "required": true
+    },
+    "external_ref": {
       "type": "string",
       "required": true
     },
     "response_time": {
-      "type": "datetime",
+      "type": "datetime"
+    },
+    "result_code": {
+      "type": "string",
       "required": true
     }
   }
