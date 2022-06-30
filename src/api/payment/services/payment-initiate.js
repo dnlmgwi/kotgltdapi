@@ -27,12 +27,12 @@ async function initialPayment(phoneNumber, amount, tran_id, remark) {
             "tran_id": tran_id,
             "remark": remark
         },
-            // {
-            //     headers: {
-            //         api_caller: process.env.TNM_API_CALLER,
-            //         access_token: process.env.TNM_ACCESS_TOKEN,
-            //     }
-            // }
+            {
+                headers: {
+                    api_caller: process.env.TNM_API_CALLER,
+                    access_token: process.env.TNM_ACCESS_TOKEN,
+                }
+            }
         );
 
         return response.data;
