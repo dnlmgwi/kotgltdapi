@@ -15,26 +15,26 @@
     "conversation_id": {
       "type": "string",
       "unique": false,
-      "required": true
+      "required": false
     },
     "result_desc": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "transaction_id": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "external_ref": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "response_time": {
       "type": "datetime"
     },
     "result_code": {
       "type": "string",
-      "required": true
+      "required": false
     }
   }
 }
