@@ -10,6 +10,8 @@ module.exports = {
     let data = ctx.request.body;
     try {
 
+      console.log(data);
+
       let results = await strapi.service('api::payment.payment-store').store(data);
 
       //TODO Sanitize All Results
@@ -36,7 +38,7 @@ module.exports = {
 
     try {
 
-      let results = await strapi.service('api::payment.payment-initiate').pay(currentUser,data);
+      let results = await strapi.service('api::payment.payment-initiate').pay(currentUser, data);
 
       //TODO Sanitize All Results
       // const sanitizedEntity = await this.sanitizeOutput(results, ctx);
