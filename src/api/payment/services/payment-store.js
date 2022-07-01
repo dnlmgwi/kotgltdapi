@@ -3,14 +3,14 @@ module.exports = {
 
         await storeResult(result);
 
-        if (!result.result_code) {
-            // const ticket = await findTicketDetails(userId, data.tran_id);
+        // if (!result.result_code) { //TODO result.result_code == "200"
+        // const ticket = await findTicketDetails(userId, data.tran_id);
 
-            const ticketDetails = await findTicketDetails(result.external_ref);
+        const ticketDetails = await findTicketDetails(result.external_ref);
 
-            //Edit Ticket Status
-            await strapi.service('api::payment.payment-process-ticket').processTicket(ticketDetails, result);
-        }
+        //Edit Ticket Status
+        await strapi.service('api::payment.payment-process-ticket').processTicket(ticketDetails, result);
+        // }
 
         return result.result_code;
     },
