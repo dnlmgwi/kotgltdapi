@@ -27,7 +27,7 @@ async function storeResult(result) {
             result_desc: result.result_desc,
             transaction_id: result.transaction_id,
             external_ref: result.external_ref,
-            response_time: dateTime
+            result_time: dateTime
         },
     });
 

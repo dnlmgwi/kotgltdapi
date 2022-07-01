@@ -29,12 +29,12 @@
       "type": "string",
       "required": false
     },
-    "response_time": {
-      "type": "datetime"
-    },
     "result_code": {
       "type": "string",
       "required": false
+    },
+    "result_time": {
+      "type": "datetime"
     }
   }
 }
