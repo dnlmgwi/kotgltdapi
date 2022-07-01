@@ -18,7 +18,7 @@ module.exports = {
 
 async function storeResult(result) {
 
-    const dateTime = new Date(result.response_time);
+    const dateTime = new Date(result.result_time);
 
     await strapi.entityService.create('api::payment.payment', {
         data: {
