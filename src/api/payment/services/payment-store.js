@@ -3,7 +3,7 @@ module.exports = {
 
         await storeResult(result);
 
-        if (result.result_code == "200") {
+        if (!result.result_code) {
             // const ticket = await findTicketDetails(userId, data.tran_id);
 
             const ticketDetails = await findTicketDetails(result.external_ref);
