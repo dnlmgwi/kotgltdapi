@@ -4,7 +4,8 @@
   "info": {
     "singularName": "game",
     "pluralName": "games",
-    "displayName": "Game"
+    "displayName": "Game",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -64,24 +65,30 @@
       "maxLength": 140
     },
     "description": {
-      "type": "string",
+      "type": "text",
       "required": true,
       "unique": false,
       "minLength": 5,
       "maxLength": 280
     },
     "cover": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "matches": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::match.match",
+      "mappedBy": "game"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event.event",
       "mappedBy": "game"
     }
   }
