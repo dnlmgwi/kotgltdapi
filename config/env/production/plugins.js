@@ -55,5 +55,11 @@ module.exports = ({
         removeDataKey: true,
       }
     }
+  }, 'users-permissions': {
+    config: {
+      jwt: {
+        expiresIn: '7d',
+      },
+    },
   },
 });

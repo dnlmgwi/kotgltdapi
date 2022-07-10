@@ -111,9 +111,8 @@
     "gender": {
       "type": "enumeration",
       "enum": [
-        "male",
-        "female",
-        "ratherNotSay"
+        "Man",
+        "Woman"
       ]
     }
   }
