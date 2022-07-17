@@ -9,9 +9,6 @@ module.exports = {
   callback: async (ctx, next) => {
     let data = ctx.request.body;
     try {
-
-      console.log(data);
-
       let results = await strapi.service('api::payment.payment-store').store(data);
 
       //TODO Sanitize All Results
