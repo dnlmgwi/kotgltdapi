@@ -2,11 +2,7 @@ module.exports = {
     delete: async (userId) => {
         //TODO: Check if user is already a captain
         //Check if user has already sent an invite to prevent mulitple invites
-        console.log(userId);
-
         const team = await findTeam(userId);
-
-        console.log(team);
 
         //TODO: Delete Team
         const result = await DeleteTeam(team.id);

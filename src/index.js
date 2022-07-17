@@ -24,7 +24,7 @@ module.exports = {
       },
       async beforeCreate(event) {
         //TODO Create & Assign Profile
-        console.log(event)
+        // console.log(event)
       },
     });
   },
