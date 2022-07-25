@@ -6,17 +6,26 @@ module.exports = {
         const eventDetails = await findEventRegistrationDetails(ticketDetails.id);
         //TODO Create Invoice
         //TODO Change From Processing to Approved
-        const entry = await strapi.entityService.update('api::event-registration.event-registration', eventDetails.id, {
-            data: {
-                status: 'approved',
-                transaction_id: paymentDetails.transaction_id
-            },
-        });
+        const entry = await approveTicket(eventDetails, paymentDetails)
 
         return entry;
     },
 }
 
+async function approveTicket(eventDetails, paymentDetails) {
+    const entry = await strapi.entityService.update('api::event-registration.event-registration', eventDetails.id, {
+        data: {
+            status: 'approved',
+            transaction_id: paymentDetails.transaction_id
+        },
+    });
+
+    if (typeof entry !== 'undefined' && !entry) {
+        throw new InvalidReferenceError();
+    }
+
+    return entry;
+}
 
 async function findEventRegistrationDetails(ticketId) {
     const ticket_details = await strapi.entityService.findOne('api::event-registration.event-registration', ticketId, {
@@ -25,7 +34,7 @@ async function findEventRegistrationDetails(ticketId) {
 
     //if deregistered throw Error
     if (ticket_details.deregistered) {
-        throw new DeregisteredError('');
+        throw new DeregisteredError();
     }
 
     //if status is approved throw Error
@@ -40,6 +49,13 @@ class PaymentFufilledError extends Error {
     constructor(message) {
         super(message);
         this.name = "Payment Already Approved";
+    }
+}
+
+class InvalidReferenceError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "Invalid Reference";
     }
 }
 

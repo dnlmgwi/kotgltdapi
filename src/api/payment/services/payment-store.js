@@ -1,7 +1,9 @@
 module.exports = {
     store: async (result) => {
 
-        await storeResult(result);
+        const user = await findUserDetails(result.external_ref);
+
+        await storeResult(result, user);
 
         // if (!result.result_code) { //TODO result.result_code == "200"
         // const ticket = await findTicketDetails(userId, data.tran_id);
@@ -16,7 +18,7 @@ module.exports = {
     },
 }
 
-async function storeResult(result) {
+async function storeResult(result, user) {
 
     const dateTime = new Date(result.result_time);
 
@@ -27,7 +29,8 @@ async function storeResult(result) {
             result_desc: result.result_desc,
             transaction_id: result.transaction_id,
             external_ref: result.external_ref,
-            result_time: dateTime
+            result_time: dateTime,
+            user: user.id
         },
     });
 
@@ -61,6 +64,39 @@ async function findTicketDetails(ticketRef) {
     }
 
     return ticket_details[0];
+}
+
+async function findUserDetails(ticketRef) {
+
+    const user = await strapi.entityService.findMany('api::event-registration.event-registration', {
+        fields: ['id'],
+        filters: {
+            reference: {
+                $eq: ticketRef,
+            },
+        },
+        populate: {
+            user: {
+                fields: ['id'],
+            }
+        },
+    });
+
+    //if no invite throw error
+    if (user.length === 0) {
+        throw new UserNotfoundError('No User Found'); //TODO: Test Error
+    }
+
+    console.log(user[0].user);
+
+    return user[0].user;
+}
+
+class UserNotfoundError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "Invite Not Found Error";
+    }
 }
 
 class PaymentFufilledError extends Error {
