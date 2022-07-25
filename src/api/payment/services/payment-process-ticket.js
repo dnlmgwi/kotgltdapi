@@ -21,7 +21,7 @@ async function approveTicket(eventDetails, paymentDetails) {
     });
 
     if (typeof entry !== 'undefined' && !entry) {
-        throw new InvalidReferenceError();
+        throw new ApprovalError();
     }
 
     return entry;
@@ -52,7 +52,7 @@ class PaymentFufilledError extends Error {
     }
 }
 
-class InvalidReferenceError extends Error {
+class ApprovalError extends Error {
     constructor(message) {
         super(message);
         this.name = "Invalid Reference";
