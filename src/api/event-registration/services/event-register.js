@@ -106,7 +106,7 @@ async function userGender(userId) {
 
 
     if (!gender) {
-        throw new Error('Gender needs to be updated on your profile');
+        throw new Error('A gender needs to be selected on your profile.');
     }
 
     return gender;
