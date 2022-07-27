@@ -1,5 +1,5 @@
 'use strict';
-
+// const { sanitizeEntity } = require('strapi-utils'); //TODO Sanitize Endpoints
 /**
  * A set of functions called "actions" for `teamManagement`
  */
