@@ -83,6 +83,13 @@
       "relation": "manyToOne",
       "target": "api::game.game",
       "inversedBy": "events"
+    },
+    "payments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payment.payment",
+      "private": true,
+      "mappedBy": "event"
     }
   }
 }

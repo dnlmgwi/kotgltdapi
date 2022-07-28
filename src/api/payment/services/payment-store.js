@@ -1,9 +1,9 @@
 module.exports = {
     store: async (result) => {
 
-        const user = await findUserDetails(result.external_ref);
+        const entry = await findDetails(result.external_ref);
 
-        await storeResult(result, user);
+        await storeResult(result, entry);
 
         // if (!result.result_code) { //TODO result.result_code == "200"
         // const ticket = await findTicketDetails(userId, data.tran_id);
@@ -18,7 +18,7 @@ module.exports = {
     },
 }
 
-async function storeResult(result, user) {
+async function storeResult(result, entry) {
 
     const dateTime = new Date(result.result_time);
 
@@ -30,7 +30,8 @@ async function storeResult(result, user) {
             transaction_id: result.transaction_id,
             external_ref: result.external_ref,
             result_time: dateTime,
-            user: user.id
+            user: entry.user.id,
+            event: entry.event.id
         },
     });
 
@@ -66,9 +67,9 @@ async function findTicketDetails(ticketRef) {
     return ticket_details[0];
 }
 
-async function findUserDetails(ticketRef) {
+async function findDetails(ticketRef) {
 
-    const user = await strapi.entityService.findMany('api::event-registration.event-registration', {
+    const entry = await strapi.entityService.findMany('api::event-registration.event-registration', {
         fields: ['id'],
         filters: {
             reference: {
@@ -78,21 +79,22 @@ async function findUserDetails(ticketRef) {
         populate: {
             user: {
                 fields: ['id'],
+            },
+            event: {
+                fields: ['id'],
             }
         },
     });
 
     //if no invite throw error
-    if (user.length === 0) {
-        throw new UserNotfoundError('No User Found'); //TODO: Test Error
+    if (entry.length === 0) {
+        throw new NotfoundError('No Entry Found'); //TODO: Test Error
     }
 
-    console.log(user[0].user);
-
-    return user[0].user;
+    return entry[0];
 }
 
-class UserNotfoundError extends Error {
+class NotfoundError extends Error {
     constructor(message) {
         super(message);
         this.name = "Invite Not Found Error";
