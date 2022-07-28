@@ -1,14 +1,22 @@
 const axios = require('axios').default;
 
+
+
+
 module.exports = {
+
     pay: async (userId, data) => {
 
 
         const ticket = await findTicketDetails(userId, data.tran_id);
 
-        const eventDetails = await findEventDetails(ticket.id)
+        const eventDetails = await findEventDetails(ticket.id);
+
+        await receivedPaymentTicket(eventDetails);
 
         const response = await initialPayment(data.msisdn, eventDetails.event.price, eventDetails.reference, eventDetails.event.name);
+
+        //TODO Change Payment From Processing to initiated
 
         return response;
 
@@ -45,13 +53,18 @@ async function initialPayment(phoneNumber, amount, tran_id, remark) {
 
 async function findEventDetails(ticketId) {
     const ticket_details = await strapi.entityService.findOne('api::event-registration.event-registration', ticketId, {
-        fields: ['deregistered', 'status', 'reference'],
+        fields: ['id', 'deregistered', 'status', 'reference'],
         populate: { event: { fields: ['price', 'name'], } },
     });
 
     //if deregistered throw Error
     if (ticket_details.deregistered) {
-        throw new DeregisteredError('');
+        throw new DeregisteredError();
+    }
+
+    //if status is recieved throw Error
+    if (ticket_details.status === 'received') {
+        throw new PaymentFufilledError('Payment was already recieved');
     }
 
     //if status is approved throw Error
@@ -62,7 +75,19 @@ async function findEventDetails(ticketId) {
     return ticket_details;
 }
 
+async function receivedPaymentTicket(eventDetails) {
+    const entry = await strapi.entityService.update('api::event-registration.event-registration', eventDetails.id, {
+        data: {
+            status: 'received',
+        },
+    });
 
+    if (typeof entry !== 'undefined' && !entry) {
+        throw new ApprovalError();
+    }
+
+    return entry;
+}
 
 async function findTicketDetails(userId, ticket_reference) {
     const ticket_details = await strapi.db.query('api::event-registration.event-registration').findOne({
@@ -96,5 +121,13 @@ class DeregisteredError extends Error {
     constructor(message) {
         super(message);
         this.name = "User Deregistered For Event";
+    }
+}
+
+//TODO Test
+class ApprovalError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "Invalid Reference";
     }
 }
