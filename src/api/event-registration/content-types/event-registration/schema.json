@@ -38,6 +38,7 @@
       "enum": [
         "approved",
         "processing",
+        "received",
         "rejected"
       ],
       "default": "processing"
