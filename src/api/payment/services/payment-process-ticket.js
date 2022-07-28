@@ -1,5 +1,20 @@
 const axios = require('axios').default;
 
+class Payment {
+    static received = new Payment('received');
+    static approved = new Payment('approved');
+    static processing = new Payment('processing');
+    static rejected = new Payment('rejected');
+
+    constructor(name) {
+        this.name = name;
+    }
+
+    toString() {
+        return this.name;
+    }
+}
+
 module.exports = {
     processTicket: async (ticketDetails, paymentDetails) => {
 
@@ -15,7 +30,7 @@ module.exports = {
 async function approveTicket(eventDetails, paymentDetails) {
     const entry = await strapi.entityService.update('api::event-registration.event-registration', eventDetails.id, {
         data: {
-            status: 'approved',
+            status: Payment.approved.name,
             transaction_id: paymentDetails.transaction_id
         },
     });
@@ -38,7 +53,7 @@ async function findEventRegistrationDetails(ticketId) {
     }
 
     //if status is approved throw Error
-    if (ticket_details.status === 'approved') {
+    if (ticket_details.status === Payment.approved.name) {
         throw new PaymentFufilledError();
     }
 
