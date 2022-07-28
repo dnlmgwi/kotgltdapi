@@ -1,7 +1,20 @@
 const axios = require('axios').default;
 
 
+class Payment {
+    static received = new Payment('received');
+    static approved = new Payment('approved');
+    static processing = new Payment('processing');
+    static rejected = new Payment('rejected');
 
+    constructor(name) {
+        this.name = name;
+    }
+
+    toString() {
+        return this.name;
+    }
+}
 
 module.exports = {
 
@@ -63,12 +76,12 @@ async function findEventDetails(ticketId) {
     }
 
     //if status is recieved throw Error
-    if (ticket_details.status === 'received') {
+    if (ticket_details.status === Payment.received.name) {
         throw new PaymentFufilledError('Payment was already recieved');
     }
 
     //if status is approved throw Error
-    if (ticket_details.status === 'approved') {
+    if (ticket_details.status === Payment.approved.name) {
         throw new PaymentFufilledError('Payment was already approved');
     }
 
@@ -78,7 +91,7 @@ async function findEventDetails(ticketId) {
 async function receivedPaymentTicket(eventDetails) {
     const entry = await strapi.entityService.update('api::event-registration.event-registration', eventDetails.id, {
         data: {
-            status: 'received',
+            status: Payment.received.name,
         },
     });
 
