@@ -1,7 +1,7 @@
 {
   "name": "kotgltdapi",
   "private": true,
-  "version": "0.1.33",
+  "version": "0.1.37",
   "description": "King Of The Grid API",
   "scripts": {
     "develop": "strapi develop",
@@ -11,12 +11,12 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-graphql": "4.3.0",
-    "@strapi/plugin-i18n": "4.3.0",
-    "@strapi/plugin-users-permissions": "4.3.0",
-    "@strapi/provider-email-nodemailer": "^4.3.0",
-    "@strapi/provider-upload-cloudinary": "^4.3.0",
-    "@strapi/strapi": "4.3.0",
+    "@strapi/plugin-graphql": "4.3.4",
+    "@strapi/plugin-i18n": "4.3.4",
+    "@strapi/plugin-users-permissions": "4.3.4",
+    "@strapi/provider-email-nodemailer": "^4.3.4",
+    "@strapi/provider-upload-cloudinary": "^4.3.4",
+    "@strapi/strapi": "4.3.4",
     "axios": "^0.27.2",
     "node-2fa": "^2.0.3",
     "pg": "^8.7.3",

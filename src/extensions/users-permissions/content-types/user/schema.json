@@ -81,13 +81,6 @@
       "type": "string",
       "required": false
     },
-    "IGN": {
-      "displayName": "ign",
-      "type": "component",
-      "repeatable": true,
-      "component": "profile.ign",
-      "min": 0
-    },
     "created_team": {
       "type": "relation",
       "relation": "oneToOne",

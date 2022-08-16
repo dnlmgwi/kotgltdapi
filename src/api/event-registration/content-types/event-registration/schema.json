@@ -53,6 +53,11 @@
     "transaction_id": {
       "type": "string",
       "unique": true
+    },
+    "ign": {
+      "type": "string",
+      "required": false,
+      "unique": false
     }
   }
 }
