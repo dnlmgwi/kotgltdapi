@@ -1,7 +1,7 @@
 {
   "name": "kotgltdapi",
   "private": true,
-  "version": "0.1.37",
+  "version": "0.1.38",
   "description": "King Of The Grid API",
   "scripts": {
     "develop": "strapi develop",
@@ -11,21 +11,21 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-graphql": "4.3.4",
-    "@strapi/plugin-i18n": "4.3.4",
-    "@strapi/plugin-users-permissions": "4.3.4",
-    "@strapi/provider-email-nodemailer": "^4.3.4",
-    "@strapi/provider-upload-cloudinary": "^4.3.4",
-    "@strapi/strapi": "4.3.4",
-    "axios": "^0.27.2",
+    "@strapi/plugin-graphql": "4.3.8",
+    "@strapi/plugin-i18n": "4.3.8",
+    "@strapi/plugin-users-permissions": "4.3.8",
+    "@strapi/provider-email-nodemailer": "^4.3.8",
+    "@strapi/provider-upload-cloudinary": "^4.3.8",
+    "@strapi/strapi": "4.3.8",
+    "axios": "^1.1.3",
     "node-2fa": "^2.0.3",
-    "pg": "^8.7.3",
+    "pg": "^8.8.0",
     "pg-connection-string": "^2.5.0",
-    "sqlite3": "5.0.2",
-    "strapi-plugin-io": "^1.1.0",
-    "strapi-plugin-publisher": "^1.1.1",
-    "strapi-plugin-transformer": "^2.0.1",
-    "uuid": "^8.3.2"
+    "sqlite3": "5.1.2",
+    "strapi-plugin-io": "^1.1.2",
+    "strapi-plugin-publisher": "^1.1.4",
+    "strapi-plugin-transformer": "^2.1.0",
+    "uuid": "^9.0.0"
   },
   "author": {
     "name": "Daniel Mgawi"
