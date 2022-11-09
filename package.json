@@ -21,7 +21,7 @@
     "node-2fa": "^2.0.3",
     "pg": "^8.8.0",
     "pg-connection-string": "^2.5.0",
-    "sqlite3": "5.1.2",
+    "better-sqlite3": "7.4.6",
     "strapi-plugin-io": "^1.1.2",
     "strapi-plugin-publisher": "^1.1.4",
     "strapi-plugin-transformer": "^2.1.0",
