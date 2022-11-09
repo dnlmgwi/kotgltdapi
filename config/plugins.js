@@ -13,6 +13,7 @@ module.exports = ({
         upload: {
           folder: env('CLOUDINARY_FOLDER'),
         },
+        uploadStream: {},
         delete: {},
       },
     },
